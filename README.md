@@ -1,7 +1,7 @@
 
 ## Simple Python3 CLI to Vespa.ai's search interface
 
-[Vespa.ai](http://vespa/) seems to miss a stupid CLI to issue search requests to the http interface.
+[Vespa.ai](http://vespa/) seems to miss a simple CLI to issue search requests to the http interface.
 
 At this point this simply takes a `YQL` query, url-encodes it and sends it off, while pretty printing the result. 
 
