@@ -6,12 +6,12 @@
 At this point this simply takes a `YQL` query, url-encodes it and sends it off, while pretty printing the result. 
 
 ### Dependencies
- - `absl` - flags parsing - `pip3 install absl-py`
- - `requests` - http client - `pip3 install requests`
+ - `absl` - flags parsing - `pip install absl-py`
+ - `requests` - http client - `pip install requests`
 
 ### Sample usage:
 
-    python3 vespa-search.py --yql "select * from sources * where default contains 'bob';"
+    $ ./vespa-search.py --yql "select * from sources * where default contains 'bob';" --param hitcountestimate=True,tracelevel=2
 
 
-Additional functionalities will be added progressively.
+Additional functionalities will be added progressively. Currently only using python3, but should be ok with Python2 as well.
