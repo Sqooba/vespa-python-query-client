@@ -9,6 +9,9 @@ At this point this simply takes a `YQL` query, url-encodes it and sends it off, 
  - `absl` - flags parsing - `pip3 install absl-py`
  - `requests` - http client - `pip3 install requests`
 
-sample usage:
+### Sample usage:
 
     python3 vespa-search.py --yql "select * from sources * where default contains 'bob';"
+
+
+Additional functionalities will be added progressively.
