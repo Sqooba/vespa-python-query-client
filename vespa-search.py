@@ -22,7 +22,13 @@ flags.DEFINE_string(
     'Complete YQL Query. May or may not be terminated with \';\''
 )
 
-flags.mark_flag_as_required('yql')
+flags.DEFINE_string(
+    'query',
+    None,
+    'Simple Vespa query. Mutually exclusive with --yql'
+)
+
+flags.mark_flags_as_mutual_exclusive(('yql', 'query'), required=True)
 
 flags.DEFINE_boolean(
     'ssl',
@@ -45,11 +51,18 @@ def parse_args(argv):
     flags.FLAGS(argv)
 
 
-def check_semicolon(yql):
+def check_yql_semicolon(yql):
     ret = yql.strip()
     if not ret.endswith(';'):
         return ret + ';'
     return ret
+
+
+def add_query(payload):
+    if FLAGS.yql is not None:
+        payload['yql'] = check_yql_semicolon(FLAGS.yql)
+    else:
+        payload['query'] = FLAGS.query.strip()
 
 
 def prefix(ssl_flag):
@@ -59,12 +72,15 @@ def prefix(ssl_flag):
 
 
 def main(argv):
+    """
+    Issue search requests to a Vespa http(s) search end-point.
+    """
     parse_args(argv)
 
     payload = dict([tuple(p.split('=')) for p in FLAGS.param])
     print('Additional parameters:\n%s' % payload)
 
-    payload['yql'] = check_semicolon(FLAGS.yql)
+    add_query(payload)
 
     req_string = '%s://%s:%d/search/' \
                  % (prefix(FLAGS.ssl), FLAGS.host, FLAGS.port)
