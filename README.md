@@ -1,9 +1,9 @@
 
 ## Simple Python3 CLI to Vespa.ai's search interface
 
-[Vespa.ai](http://vespa.ai/) seems to miss a simple CLI to issue search requests to the http interface.
+[Vespa.ai](http://vespa.ai/) seems to miss a simple command line interface to issue search requests to the http rest api.
 
-At this point this simply takes a `YQL` query, url-encodes it and sends it off, while pretty printing the result. 
+At this point this simply takes a `YQL` or *simple* query, sends it off, pretty printing the result, while supporting the addition of `GET` parameters.
 
 ### Dependencies
  - `absl` - flags parsing - `pip install absl-py`
